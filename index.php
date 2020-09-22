@@ -15,8 +15,8 @@ Kirby::plugin('pwaldhauer/calendar-view', [
 
                     $result = $page->index(true)
                         ->filterBy('date', '!=' ,'')
-                        ->filterBy('date', 'date >', $from)
-                        ->filterBy('date', 'date <', $to)
+                        ->filterBy('date', 'date >=', $from)
+                        ->filterBy('date', 'date <=', $to)
                         ->map(function ($page)  {
                         return [
                             'id' => $page->id(),
