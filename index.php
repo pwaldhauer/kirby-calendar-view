@@ -11,7 +11,7 @@ Kirby::plugin('pwaldhauer/calendar-view', [
                 'pattern' => 'calendar-view/(:any)/(:any)/(:any)',
                 'action' => function ($path, $from, $to) {
                     /** @var \Page $page */
-                    $page = page($path);
+                    $page = page(str_replace('+', '/', $path));
 
                     $result = $page->index(true)
                         ->filterBy('date', '!=' ,'')
@@ -21,7 +21,7 @@ Kirby::plugin('pwaldhauer/calendar-view', [
                         return [
                             'id' => $page->id(),
                             'title' => (string)$page->title(),
-                            'date' => (string)$page->date(),
+                            'date' => (string)$page->date()->toDate('Y-m-d'),
                             'panelLink' => 'pages/' . str_replace('/', '+', $page->id()),
                             'status' => (string)$page->status()
                         ];
